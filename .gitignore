@@ -1,0 +1,12 @@
+# Entorno virtual
+.venv/
+# Bytecode y caches
+__pycache__/
+*.py[cod]
+# Configuración de IDEs
+.vscode/
+.idea/
+# Datos sensibles y temporales
+config/config.yaml
+data/raw/
+data/processed/
