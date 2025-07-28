@@ -42,7 +42,11 @@
 5. **Seguridad**: rol `roles/run.invoker` asignado a `allUsers` para acceso público.  
 6. **Monitoreo**: Cloud Logging & Monitoring recolectan logs y métricas.  
 
+# Principales componentes técnologicos utilizados en el despliegue a producción.
 ![🌐 Diagrama del entorno de producción](images/diagrama_entorno_produccion.png)
+
+# Flujo de trabajo y despliegue del modelo.
+![Diagrama de despliegue en español](images/diagrama_despliegue.png)
 
 ---
 
