@@ -1,0 +1,14 @@
+# Capacidad máxima del FC (unidades totales)
+max_capacity: 650000
+
+# Inventario inicial del FC (unidades totales)
+initial_capacity: 400000
+
+# Saturación objetivo del almacén (
+saturation_target: 0.95
+
+# Días On Hand deseados por SKU
+default_doh: 7
+
+# Periodo de análisis por defecto (días)
+analysis_period_days: 30

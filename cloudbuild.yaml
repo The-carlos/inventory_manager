@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile.prod', '-t', 'us-central1-docker.pkg.dev/project-inventory-manager-prod/repo-inventory-manager-prod/image-v1-inventory-manager-prod:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/project-inventory-manager-prod/repo-inventory-manager-prod/image-v1-inventory-manager-prod:latest']

@@ -1,0 +1,9 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: servicio-inventory-manager
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/project-inventory-manager-prod/repo-inventory-manager-prod/image-v1-inventory-manager-prod:latest

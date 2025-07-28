@@ -1,0 +1,12 @@
+# Ignorar entornos y caches
+.venv/
+__pycache__/
+*.pyc
+
+# Ignorar metadatos de git y editores
+.git/
+.vscode/
+.idea/
+
+# ¡Importante! No ignoramos la carpeta config/
+!config/
