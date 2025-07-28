@@ -22,6 +22,8 @@ El algoritmo que desarrollamos es capaz de determinar la cantidad de inventario 
 1. Tomar un périodo de tiempo de dís como input del usuario y calcular la evolución del stock en el tiempo y mostrarlo visualmente.
 2. Tomar todos los inputs necesarios para calcular cuánto más inventario de cada SKU se necesit para llegar a los DOH por SKU establecidos.
 
+---
+
 ## ⚙️ Parametros necesarios
 Archivo `config/config.yaml`:
 
@@ -32,6 +34,8 @@ saturation_target: 0.95      # Saturación objetivo (95%)
 default_doh: 7               # Días On Hand por SKU
 analysis_period_days: 30     # Días a simular por defecto
 ```
+
+---
 
 ## Principales algoritmos:
 ### `simulate_inventory(df_skus, analysis_days, start_date=None)`
@@ -64,6 +68,43 @@ En este ejemplo, el SKU "A" comienza con un stock de 10 unidades, el usuario sol
 | 2025-07-30 | B      | 1           |
 | 2025-07-31 | A      | 1           |
 | 2025-07-31 | B      | 0           |
+
+### `recommend_purchases_time(df_sim, df_skus, default_doh)`
+
+A partir de la simulación, calcula para cada fecha y SKU:
+
+- Cuánto stock se necesita para cubrir el DOH.
+- Cuánto comprar si hay escasez.
+- Estado ('en escasez', 'en exceso' o 'sin cambio').
+
+```python
+# Supongamos que df_sim es el resultado anterior:
+df_sim = pd.DataFrame([
+    {'date': date(2025,7,29), 'sku_id': 'A', 'stock_level': 7},
+    {'date': date(2025,7,29), 'sku_id': 'B', 'stock_level': 3},
+    {'date': date(2025,7,30), 'sku_id': 'A', 'stock_level': 4},
+    {'date': date(2025,7,30), 'sku_id': 'B', 'stock_level': 1},
+])
+
+# SKUs con avg_daily_sales
+df_skus = pd.DataFrame([
+    {'sku_id': 'A', 'avg_daily_sales': 3},
+    {'sku_id': 'B', 'avg_daily_sales': 2},
+])
+
+# DOH deseados: 2 días
+df_rec = recommend_purchases_time(df_sim, df_skus, default_doh=2)
+print(df_rec)
+```
+En este ejemplo, el SKU A tiene **3 ventas promedio diarías**, recordando que el **stock inicial es 10** y los **doh necesarios son 2** quiere decir que **Se necesitan 6 unidades para cubrir su demanda.** Para el primer día el stock cambia a 7 y es marcado aún como "en exceso", pero para el segundo día el stock cae a 4 unidades. El algoritmo determina que necesitamos comprar 2 unidades para ese fecha y marca SKU como "en escasez".
+
+|    date    | sku_id | stock_level | required_for_doh | purchase_qty | status     |
+|:----------:|:------:|:-----------:|:----------------:|--------------|------------|
+| 2025-07-29 | A      | 7           | 6                | 0            | en exceso  |
+| 2025-07-29 | B      | 3           | 4                | 1            | en escasez |
+| 2025-07-30 | A      | 4           | 6                | 2            | en escasez |
+| 2025-07-30 | B      | 1           | 4                | 3            | en escasez |
+---
 
 ## **Tecnologías empleadas:**  
 - 🐍 Python 3.11+  
