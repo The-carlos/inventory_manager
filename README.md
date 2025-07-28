@@ -1,5 +1,11 @@
 # Inventory Manager 🚀
 
+La solución está desplegada utilizando Google Cloud Platform y está lista para ser probada ya mismo en el siguiente link 🥳🥳🥳 :
+
+https://servicio-inventory-manager-52421279413.us-central1.run.app
+
+---
+
 ## Descripción  
 **Inventory Manager** es una herramienta interactiva para simular la evolución de inventario en bodegas de Mercado Libre y sugerir automáticamente recomendaciones de compra por SKU según **Days On Hand** (DOH), capacidad máxima y saturación objetivo.  
 
@@ -19,8 +25,9 @@ El algoritmo que desarrollamos es capaz de determinar la cantidad de inventario 
 - Se asume que **todos** los SKUs tienen la **misma cantidad de DOH** que querrmos tener en el FC entendiendo como 1 Days On Hand a la cantidad de stock necesario para surtir la venta de un día tomando como referencia la venta promedio diaría de cada SKU.
 
 ## Flujo de trabajo propuesto
-1. Tomar un périodo de tiempo de dís como input del usuario y calcular la evolución del stock en el tiempo y mostrarlo visualmente.
+1. Tomar un périodo de tiempo de días como input del usuario y calcular la evolución del stock en el tiempo y mostrarlo visualmente.
 2. Tomar todos los inputs necesarios para calcular cuánto más inventario de cada SKU se necesit para llegar a los DOH por SKU establecidos.
+**Nota importante:** Los datos de stock y ventas promedio iniciales se generan de forma aleatoria por un algoritmo (`generate_skus.py`).
 
 ---
 
