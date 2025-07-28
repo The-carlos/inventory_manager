@@ -38,6 +38,8 @@ analysis_period_days: 30     # Días a simular por defecto
 
 Simula la evolución diaria del inventario de cada SKU.
 
+Esto lo logra tomando como base el stock de cada SKU y por cada días del periodo seleccionado por el usuario se resta un el número de compras diarias promedio de ese SKU y se guarda la evolución del stock en el tiempo hasta agotar todo el inventario.
+
 ```python
 
 
@@ -51,6 +53,8 @@ df_skus = pd.DataFrame({
 # Simular 3 días a partir de hoy
 df_sim = simulate_inventory(df_skus, analysis_days=3, start_date=date(2025, 7, 28))
 print(df_sim)
+
+# En este ejemplo, el SKU "A" comienza con un stock de 10 unidades, el usuario solicita ver la información en los siguientes 3 días comenzanfo con el día 28 de julio 2025. En el primer día el stock baja a 7 unidades (porque la venta promedio del SKU es 3) y continua iterativamente hasta llegar a día 3 donde el SKU A solamente tendrá una pieza restante.
 ```
 |    date    | sku_id | stock_level |
 |:----------:|:------:|:-----------:|
